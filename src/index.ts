@@ -2,27 +2,27 @@ import {
   ConnectOptions,
   Connection as MongooseConnection,
   createConnection,
-} from "mongoose";
+} from 'mongoose'
 import MongoDatabaseInstance, {
   ModelDeclaration,
-} from "./MongoDatabaseInstance";
+} from './MongoDatabaseInstance'
 
 async function createMongooseConnection(
   connectionString: string,
   options?: ConnectOptions
 ): Promise<MongooseConnection> {
-  const connection = await createConnection(connectionString, options);
-  return connection;
+  const connection = await createConnection(connectionString, options)
+  return connection
 }
 
 type MongoDatabaseDeclaration = {
-  name: string;
-  uri: string;
-  options: ConnectOptions;
-  models: ModelDeclaration[];
-};
+  name: string
+  uri: string
+  options: ConnectOptions
+  models: ModelDeclaration[]
+}
 export default class DatabaseManager {
-  static instances: Record<string, MongoDatabaseInstance> = {};
+  static instances: Record<string, MongoDatabaseInstance> = {}
 
   async start(
     declarations: MongoDatabaseDeclaration[]
@@ -31,17 +31,17 @@ export default class DatabaseManager {
       const connection = await createMongooseConnection(
         declaration.uri,
         declaration.options
-      );
-      const databaseInstance = new MongoDatabaseInstance(connection);
+      )
+      const databaseInstance = new MongoDatabaseInstance(connection)
       for (const model of declaration.models) {
-        databaseInstance.addModel(model);
+        databaseInstance.addModel(model)
       }
-      DatabaseManager.instances[declaration.name] = databaseInstance;
+      DatabaseManager.instances[declaration.name] = databaseInstance
     }
-    return DatabaseManager.instances;
+    return DatabaseManager.instances
   }
 
   static getDb(name: string): MongoDatabaseInstance {
-    return this.instances[name];
+    return this.instances[name]
   }
 }
