@@ -24,7 +24,7 @@ type MongoDatabaseDeclaration = {
 export default class DatabaseManager {
   static instances: Record<string, MongoDatabaseInstance> = {}
 
-  async start(
+  static async start(
     declarations: MongoDatabaseDeclaration[]
   ): Promise<Record<string, MongoDatabaseInstance>> {
     for (const declaration of declarations) {
