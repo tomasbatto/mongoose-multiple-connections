@@ -1,6 +1,6 @@
 {
   "name": "mongoose-multiple-connections",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "Manage multiple Mongoose connections in a simple way",
   "main": "build/index.js",
   "files": [
