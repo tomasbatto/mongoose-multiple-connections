@@ -2,7 +2,7 @@
   "name": "mongoose-multiple-connections",
   "version": "1.0.0",
   "description": "Manage multiple Mongoose connections in a simple way",
-  "main": "src/index.js",
+  "main": "build/index.js",
   "scripts": {
     "build": "rimraf ./build && tsc",
     "start": "npm run build && node build/index.js",
