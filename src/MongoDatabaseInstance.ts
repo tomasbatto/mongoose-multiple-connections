@@ -24,6 +24,10 @@ export default class MongoDatabaseInstance {
 
   addModel(modelDeclaration: ModelDeclaration): Model<Document> {
     const { name, schema, options } = modelDeclaration
+    const existingModel = this.getModel(name)
+    if(existingModel) {
+      return existingModel
+    }
     if (options && options.readPreference) {
       schema.set('read', options.readPreference)
     }

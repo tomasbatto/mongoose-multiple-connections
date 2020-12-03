@@ -19,7 +19,7 @@ type MongoDatabaseDeclaration = {
   name: string
   uri: string
   options: ConnectOptions
-  models: ModelDeclaration[]
+  models?: ModelDeclaration[]
 }
 export default class DatabaseManager {
   static instances: Record<string, MongoDatabaseInstance> = {}
@@ -33,6 +33,9 @@ export default class DatabaseManager {
         declaration.options
       )
       const databaseInstance = new MongoDatabaseInstance(connection)
+      if (!declaration.models) {
+        declaration.models = []
+      }
       for (const model of declaration.models) {
         databaseInstance.addModel(model)
       }
